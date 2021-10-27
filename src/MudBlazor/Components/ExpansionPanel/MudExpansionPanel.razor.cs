@@ -8,6 +8,8 @@ namespace MudBlazor
     {
         private bool _nextPanelExpanded;
         private bool _isExpanded;
+        private bool? _isInitiallyExpanded;
+
         [CascadingParameter] private MudExpansionPanels Parent { get; set; }
 
         protected string Classname =>
@@ -89,7 +91,15 @@ namespace MudBlazor
         /// Sets the initial expansion state. Do not use in combination with IsExpanded.
         /// Combine with MultiExpansion to have more than one panel start open.
         /// </summary>
-        [Parameter] public bool IsInitiallyExpanded { get; set; }
+        [Parameter]
+        public bool IsInitiallyExpanded
+        {
+            get => _isInitiallyExpanded ?? false;
+            set
+            {
+                _isInitiallyExpanded = value;
+            }
+        }
 
         /// <summary>
         /// If true, the component will be disabled.
